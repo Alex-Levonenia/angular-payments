@@ -1,0 +1,14 @@
+.payments-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+
+.h1-wrapper {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.header-title {
+  margin-bottom: 0;
+}
