@@ -26,7 +26,9 @@ export class CounterComponent implements OnInit {
     payments.forEach(payment => {
       payment.selectedMonthsIds.forEach(monthId => {
         const month: IMonth = this.months.find(month => month.id === monthId);
-        this.sum += month.days * payment.price;
+        if (month) {
+          this.sum += month.days * payment.price;
+        }
       });
     });
   }

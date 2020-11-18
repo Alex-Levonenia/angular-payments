@@ -34,7 +34,6 @@ export class PaymentsComponent implements OnInit {
           }
         )).subscribe(result => {
       this.payments = result;
-      console.log(result);
     });
   }
 
@@ -48,7 +47,6 @@ export class PaymentsComponent implements OnInit {
 
   deletePayment(payment: IPayment): void {
     this.isLoadingData = true;
-    this.cdr.detectChanges();
     this.paymentsService.deletePayment(payment).pipe(finalize(() => {
       this.getPayments();
     })).subscribe();
