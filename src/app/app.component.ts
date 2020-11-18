@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {PaymentsService} from './payments/services/payments.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-payments';
+
+  constructor(paymentService: PaymentsService) {
+  }
+
+  testMeMethod(param: number): number {
+    return param**2;
+  }
 }

@@ -1,0 +1,29 @@
+table {
+  width: 100%;
+  padding: 10px;
+}
+
+.align-center {
+  text-align: center;
+}
+
+td {
+  text-align: center;
+}
+
+.th-month {
+  width: 40px;
+}
+
+.spinner-wrapper {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+}
