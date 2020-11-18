@@ -1,10 +1,10 @@
 <div *ngIf="isLoadingData" class="spinner-wrapper">
-  <mat-spinner diameter="50"></mat-spinner>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
 
-<payment-form *ngIf="!isLoadingData" (addPayment)="createPayment($event)"></payment-form>
+<payment-form (addPayment)="createPayment($event)"></payment-form>
 
-<table *ngIf="!isLoadingData" mat-table [dataSource]="payments">
+<table mat-table [dataSource]="payments">
 
   <ng-container matColumnDef="title">
     <th mat-header-cell *matHeaderCellDef class="align-center"> Наименование платежа</th>
