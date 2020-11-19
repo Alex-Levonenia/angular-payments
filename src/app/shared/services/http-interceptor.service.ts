@@ -7,6 +7,11 @@ import {Observable} from 'rxjs';
 })
 export class HttpInterceptorService implements HttpInterceptor {
 
+  /**
+   * Intercepts http request to past custom header for the database
+   * @param req
+   * @param next
+   */
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const httpRequest = req.clone({
       headers: new HttpHeaders({

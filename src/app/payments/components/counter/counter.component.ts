@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
-import {IPayment} from '../interfaces/payment.interface';
-import {IMonth} from '../../shared/interfaces/month.interface';
-import {Settings} from '../../shared/settings';
+import {IPayment} from '../../interfaces/payment.interface';
+import {IMonth} from '../../../shared/interfaces/month.interface';
+import {Settings} from '../../../shared/settings';
 
 @Component({
   selector: 'app-counter',
@@ -10,17 +10,39 @@ import {Settings} from '../../shared/settings';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CounterComponent implements OnInit {
-  @Input() payments: IPayment[];
+  /**
+   * List of displayed payments
+   */
+  @Input()
+  payments: IPayment[];
+
+  /**
+   * Value to display summary spending for all payments
+   */
   public sum: number = 0;
+  /**
+   * List of all months with days numbers, titles and randomized ids.
+   * @private
+   */
   private months: IMonth[] = Settings.MONTHS;
 
+  /**
+   * Creates counter component instance
+   */
   constructor() {
   }
 
+  /**
+   * onInit lifecycle hook
+   */
   ngOnInit(): void {
     this.countSum(this.payments);
   }
 
+  /**
+   * Counts sum of all payments prices
+   * @param payments
+   */
   countSum(payments: IPayment[]): void {
     this.sum = 0;
     payments.forEach(payment => {

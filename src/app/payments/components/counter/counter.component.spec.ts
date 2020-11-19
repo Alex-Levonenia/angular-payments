@@ -1,8 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {CounterComponent} from './counter.component';
-import {IPayment} from '../interfaces/payment.interface';
-import {Settings} from '../../shared/settings';
+import {IPayment} from '../../interfaces/payment.interface';
+import {Settings} from '../../../shared/settings';
 
 describe('CounterComponent', () => {
   let component: CounterComponent;

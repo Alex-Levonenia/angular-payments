@@ -7,6 +7,9 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
 
+  /**
+   * Creates instance of app component
+   */
   constructor() {
   }
 }
