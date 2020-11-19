@@ -1,6 +1,12 @@
-import {IMonth} from "./interfaces/month.interface";
+import {IMonth} from './interfaces/month.interface';
 
+/**
+ * Class that represents settings properties
+ */
 export class Settings {
+  /**
+   * List of all months with days numbers, titles and randomized ids.
+   */
   public static MONTHS: IMonth[] = [
     {
       id: '64c26063-84f7-4666-be5c-ddd1ecba07fd',
@@ -62,5 +68,5 @@ export class Settings {
       title: 'Дек',
       days: 31
     },
-  ]
+  ];
 }

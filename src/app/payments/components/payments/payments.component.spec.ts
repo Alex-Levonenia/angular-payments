@@ -1,7 +1,7 @@
 import {PaymentsComponent} from './payments.component';
-import {PaymentsService} from '../services/payments.service';
+import {PaymentsService} from '../../services/payments.service';
 import {Observable, of} from 'rxjs';
-import {IPayment} from '../interfaces/payment.interface';
+import {IPayment} from '../../interfaces/payment.interface';
 import {ChangeDetectorRef} from '@angular/core';
 
 describe('PaymentsComponent', () => {
@@ -72,7 +72,7 @@ describe('PaymentsComponent', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('should also call updatePayment', () => {
+  it('should call updatePayment and selectedMonthsIds to equal empty array', () => {
     const spy = spyOn(mockPaymentsService, 'updatePayment').and.callThrough();
     component.removeMonthFromPayment(mockPayment, 'goodId');
     expect(spy).toHaveBeenCalled();

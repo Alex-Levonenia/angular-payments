@@ -1,8 +1,8 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {IPayment} from '../interfaces/payment.interface';
-import {PaymentsService} from '../services/payments.service';
-import {IMonth} from '../../shared/interfaces/month.interface';
-import {Settings} from '../../shared/settings';
+import {IPayment} from '../../interfaces/payment.interface';
+import {PaymentsService} from '../../services/payments.service';
+import {IMonth} from '../../../shared/interfaces/month.interface';
+import {Settings} from '../../../shared/settings';
 import {finalize} from 'rxjs/operators';
 
 @Component({
@@ -12,18 +12,46 @@ import {finalize} from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaymentsComponent implements OnInit {
+  /**
+   * List of payments to display
+   */
   public payments: IPayment[];
+
+  /**
+   * List of months to display
+   */
   public months: IMonth[] = Settings.MONTHS;
-  public columns = ['title', 'price'].concat(this.months.map(month => month.title)).concat(['delete']);
+
+  /**
+   * List of columns to display in the table
+   */
+  public columns: string[] = [];
+
+  /**
+   * Displays spinner when true
+   */
   public isLoadingData: boolean = false;
 
+  /**
+   * Creates payment component instance
+   * @param paymentsService
+   * @param cdr
+   */
   constructor(private paymentsService: PaymentsService, private cdr: ChangeDetectorRef) {
   }
 
+  /**
+   * onInit lifecycle hook.
+   * Loads data and sets default value for columns
+   */
   ngOnInit(): void {
+    this.columns = ['title', 'price'].concat(this.months.map(month => month.title)).concat(['delete']);
     this.getPayments();
   }
 
+  /**
+   *Loads list of payments
+   */
   getPayments(): void {
     this.isLoadingData = true;
     this.paymentsService.getPayments()
@@ -37,6 +65,10 @@ export class PaymentsComponent implements OnInit {
     });
   }
 
+  /**
+   * Creates a payment and reloads data
+   * @param payment
+   */
   createPayment(payment: IPayment): void {
     this.isLoadingData = true;
     payment.selectedMonthsIds = [];
@@ -45,6 +77,10 @@ export class PaymentsComponent implements OnInit {
     })).subscribe();
   }
 
+  /**
+   * Deletes a payment and reloads data
+   * @param payment
+   */
   deletePayment(payment: IPayment): void {
     this.isLoadingData = true;
     this.paymentsService.deletePayment(payment).pipe(finalize(() => {
@@ -52,6 +88,11 @@ export class PaymentsComponent implements OnInit {
     })).subscribe();
   }
 
+  /**
+   * Calls add or remove month depends on including month in payment
+   * @param payment
+   * @param monthId
+   */
   changePaymentMonth(payment: IPayment, monthId: string): void {
     if (!this.hasMonth(payment, monthId)) {
       this.addMonthToPayment(payment, monthId);
@@ -60,10 +101,20 @@ export class PaymentsComponent implements OnInit {
     }
   }
 
+  /**
+   * Checks if payment has month id inside
+   * @param payment
+   * @param monthId
+   */
   hasMonth(payment: IPayment, monthId: string): boolean {
     return payment.selectedMonthsIds.includes(monthId);
   }
 
+  /**
+   * Add month to payment and reloads data
+   * @param payment
+   * @param monthId
+   */
   addMonthToPayment(payment: IPayment, monthId: string): void {
     this.isLoadingData = true;
     payment.selectedMonthsIds.push(monthId);
@@ -72,6 +123,11 @@ export class PaymentsComponent implements OnInit {
     })).subscribe();
   }
 
+  /**
+   * Removes month from payment and reloads data
+   * @param payment
+   * @param monthId
+   */
   removeMonthFromPayment(payment: IPayment, monthId: string): void {
     this.isLoadingData = true;
     payment.selectedMonthsIds = payment.selectedMonthsIds.filter(id => id !== monthId);

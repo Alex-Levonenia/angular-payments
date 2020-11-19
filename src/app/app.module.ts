@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {PaymentsComponent} from './payments/components/payments.component';
+import {PaymentsComponent} from './payments/components/payments/payments.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -14,7 +14,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {CounterComponent} from './payments/components/counter.component';
+import {CounterComponent} from './payments/components/counter/counter.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({

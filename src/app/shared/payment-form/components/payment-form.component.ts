@@ -8,14 +8,26 @@ import {IPayment} from '../../../payments/interfaces/payment.interface';
   styleUrls: ['./payment-form.component.css']
 })
 export class PaymentFormComponent implements OnInit {
+  /**
+   * Add payment emitter
+   */
+  @Output()
+  addPayment: EventEmitter<IPayment> = new EventEmitter<IPayment>();
 
-  @Output() addPayment: EventEmitter<IPayment> = new EventEmitter<IPayment>();
-
+  /**
+   * Form for adding payment
+   */
   public paymentForm: FormGroup;
 
+  /**
+   * Creates payment form component instance
+   */
   constructor() {
   }
 
+  /**
+   * onInit lifecycle hook
+   */
   ngOnInit(): void {
     this.paymentForm = new FormGroup({
         title: new FormControl('', {validators: [Validators.required, Validators.maxLength(40)]}),
@@ -24,6 +36,10 @@ export class PaymentFormComponent implements OnInit {
     );
   }
 
+  /**
+   * Emits new payment is form is valid
+   * @param form
+   */
   onSubmit(form: FormGroup): void {
     if (!form.invalid) {
       this.addPayment.emit({
