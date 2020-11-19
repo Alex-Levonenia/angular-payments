@@ -1,0 +1,23 @@
+<form class="form-container" [formGroup]="paymentForm" (ngSubmit)="onSubmit(paymentForm)">
+  <mat-form-field>
+    <input matInput formControlName="title" placeholder="Наименование платежа" required>
+    <mat-error *ngIf="paymentForm.controls.title.errors?.required">
+      Обязательное поле
+    </mat-error>
+    <mat-error *ngIf="paymentForm.controls.title.errors?.maxlength">
+      Наименование слишком длинное
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input type="number" matInput formControlName="price" placeholder="Стоимость за день">
+    <mat-error *ngIf="paymentForm.controls.price.errors?.min">
+      Стоимость должна быть более 0
+    </mat-error>
+    <mat-error *ngIf="paymentForm.controls.price.errors?.max">
+      Стоимость не может быть более 100000
+    </mat-error>
+  </mat-form-field>
+  <button mat-raised-button type="submit"
+          [disabled]="paymentForm.invalid">Добавить
+  </button>
+</form>
